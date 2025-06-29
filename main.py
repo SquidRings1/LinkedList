@@ -14,19 +14,27 @@ class LinkedList:
         node = Node(data, self.head) # on créer un node avec notre elt soit data et self.head qui est notre pointeur soit next
         # donc notre prochain elt du node sera notre current head
         self.head = node # maintenant notre head c'est le node qu'on vient de créer
+
+    def append(self, data):
+        newnode = Node(data) # on créer un node avec notre elt soit data
+        curr = self.head # on créer un var curr qui va partir de la head
+        while curr.next != None: # on avance jusqu'à la fin
+            curr = curr.next # on incrémente
+        
+        curr.next= newnode # on ajoute au suivant après le dernier le new node donc exemple 1->2-> on est arriver a 2 donc le curr.next donc celui après 2 sera le newnode
     
     def print_list(self):
         # dans le cas où notre head est null donc vide c'est que la liste n'existe pas
         if self.head is None:
             print("Liste vide")
             return
-        temp = self.head
+        curr = self.head
         result = ""
-        while temp:
+        while curr:
             # ajoute la données de notre node dans une var
-            result += str(temp.data) + '->'
+            result += str(curr.data) + '->'
             # fait avancer notre node
-            temp = temp.next
+            curr = curr.next
         print(result)
         
     # il a pas de next donc on dit none
@@ -34,20 +42,35 @@ class LinkedList:
         # si on call cette methode quand la liste est vide
         if self.head is None:
             # on dit que la head est vide
-            self.head = None(data, None)
+            self.head = Node(data, None)
             return
         
         # on va a la head et on avance pour arriver a la limite qui est la fin de la liste
-        temp = self.head
-        while temp.next:
-            temp = temp.next
+        curr = self.head
+        while curr.next:
+            curr = curr.next
         # quand on est arriver a la fin de la liste chaine le next sera node data, None (car fin donc pas de next)
-        temp.next = (data, None)
+        curr.next = Node(data, None)
+    
+    def remove_last(self):
+        if self.head is None:
+            print("Liste vide")
+            return
+        
+        curr = self.head
+        while curr.next.next: # On s'arrête à l'avant-dernier élément
+            curr = curr.next
+        
+        curr.next = None # On supprime le lien vers le dernier élément
 
 
 if __name__ == '__main__':
     ll = LinkedList()
     ll.insert_at_begining(1)
-    ll.insert_at_begining(2)
+    ll.append(2)
+    ll.append(3)
+    ll.print_list()
     ll.insert_at_end(10)
+    ll.print_list()
+    ll.remove_last()
     ll.print_list()
