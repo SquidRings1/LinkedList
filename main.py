@@ -63,6 +63,18 @@ class LinkedList:
         
         curr.next = None # On supprime le lien vers le dernier élément
 
+    def length(self):
+        if self.head is None:
+            print("Liste vide")
+            return
+        
+        curr = self.head
+        size = 0
+        while curr.next != None:
+            size +=1
+            curr = curr.next
+        print(size)
+
 
 if __name__ == '__main__':
     ll = LinkedList()
@@ -70,7 +82,13 @@ if __name__ == '__main__':
     ll.append(2)
     ll.append(3)
     ll.print_list()
+    ll.length()
     ll.insert_at_end(10)
     ll.print_list()
+    ll.length()
     ll.remove_last()
     ll.print_list()
+    ll.length()
+    ll.remove_last()
+    ll.print_list()
+    ll.length()
