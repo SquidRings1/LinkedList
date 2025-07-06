@@ -75,6 +75,26 @@ class LinkedList:
             curr = curr.next
         print(size)
 
+    def remove_at_pos(self, pos):
+        if self.head is None:
+            print("Liste vide")
+            return
+
+        if pos == 0:
+            self.head = self.head.next
+            return
+
+        curr = self.head
+        count = 0
+
+        while curr is not None and curr.next is not None:
+            if count == pos-1:
+                print(f"count : {count}")
+                curr.next = curr.next.next
+                return
+            curr = curr.next
+            count+=1
+
 
 if __name__ == '__main__':
     ll = LinkedList()
@@ -90,5 +110,13 @@ if __name__ == '__main__':
     ll.print_list()
     ll.length()
     ll.remove_last()
+    ll.print_list()
+    ll.length()
+    print("remove at pos")
+    ll.append(9)
+    ll.append(10)
+    ll.print_list()
+    ll.length()
+    ll.remove_at_pos(1)
     ll.print_list()
     ll.length()
